@@ -10,3 +10,7 @@ Style/BlockComments:
   Enabled: false
 Naming/MethodName:
   EnforcedStyle: camelCase
+Metrics/BlockLength:
+  Enabled: false
+Metrics/MethodLength:
+  Enabled: false
