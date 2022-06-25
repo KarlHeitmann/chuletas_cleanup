@@ -6,3 +6,7 @@ AllCops:
     - bin/htmldiff
     - bin/ldiff
     - bin/rspec
+Style/BlockComments:
+  Enabled: false
+Naming/MethodName:
+  EnforcedStyle: camelCase
