@@ -1,29 +1,19 @@
 # frozen_string_literal: true
 
 require 'main'
+require 'json'
 
 RSpec.describe 'method analyze with only modified files' do
+  def loadFixture(fixture)
+    json = File.read(['spec/fixtures/data', fixture].join('/'))
+    JSON.parse(json)
+  end
+
   let(:file_no_offenses) do
-    [
-      'diff --git a/prueba.rb b/prueba.rb',
-      'index 9058067e02..33f9fe0eb3 100644',
-      '--- a/prueba.rb',
-      '+++ b/prueba.rb',
-      '@@ -7,0 +8,2 @@ end',
-      '+"bla bla"',
-      '+'
-    ]
+    loadFixture('prueba.rb_diff.json')
   end
   let(:file_with_offenses) do
-    [
-      'diff --git a/prueba.rb b/prueba.rb',
-      'index 9058067e02..33f9fe0eb3 100644',
-      '--- a/prueba.rb',
-      '+++ b/prueba.rb',
-      '@@ -7,0 +8,2 @@ end',
-      '+"bla bla" # HACK_ME',
-      '+'
-    ]
+    loadFixture('prueba.rb_diff_hack_me.json')
   end
   it 'returns empty array on no offenses' do
     expect(analyze(file_no_offenses)).to eq({})
