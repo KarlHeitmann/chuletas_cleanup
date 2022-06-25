@@ -2,7 +2,7 @@
 
 OFFENSES = ["ERASE_ME", "HACK_ME", "XXX_ME", "binding.pry", "puts"]
 
-class IOUtils # HACK_ME
+class IOUtils
   def dummy
     "dummy foobar"
   end
@@ -55,5 +55,5 @@ def run
   exit 1
 end
 
-# run
+run unless ENV["CHULETAS_CLEANUP_TEST"].nil? # HACK_ME
 

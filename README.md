@@ -36,11 +36,18 @@ And better understand it's lifetimes, borrows, etc, etc.
 Just copy the `main.rb`, add execution permission to your copy, and move it to the folder `.git/hooks/` and call it `pre-commit` the steps
 should be something like this:
 
-> cp main.rb pre-commit
+> cp lib/main.rb pre-commit
 
 > chmod +x pre-commit
 
 > mv pre-commit /path/to/your/cool/project/.git/hooks
+
+# TESTS
+
+Run the `bin/rspec/` command, but you must set the environment variable `CHULETAS_CLEANUP_TEST` because if it is set, it doesn't run the
+`run` method on the file `lib/main.rb`
+
+> CHULETAS_CLEANUP_TEST bin/rspec
 
 # GUIDELINES AND CONTRIBUTION
 
