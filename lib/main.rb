@@ -46,11 +46,7 @@ def loopFiles(listing, io)
     next unless extension == 'rb'
 
     diffs = getDiffFile(io, file)
-    puts ":::::::::"
-    puts ":::::::::"
     puts diffs.inspect
-    puts ":::::::::"
-    puts ":::::::::"
     result = { file => analyze(diffs) }
     results << result unless result[file].empty?
   end

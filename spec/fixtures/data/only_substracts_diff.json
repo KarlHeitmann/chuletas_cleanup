@@ -1,0 +1,12 @@
+[
+  "diff --git a/lib/main.rb b/lib/main.rb",
+  "index c9c5486..24b9d83 100755",
+  "--- a/lib/main.rb",
+  "+++ b/lib/main.rb",
+  "@@ -49,2 +48,0 @@ def loopFiles(listing, io)",
+  "-    puts \":::::::::\"",
+  "-    puts \":::::::::\"",
+  "@@ -52,2 +49,0 @@ def loopFiles(listing, io)",
+  "-    puts \":::::::::\"",
+  "-    puts \":::::::::\""
+]

@@ -18,6 +18,9 @@ RSpec.describe 'method analyze with only modified files' do
   let(:file_with_offenses_adds_substracts) do
     loadFixture('adds_substracts_diff.json')
   end
+  let(:file_with_no_offenses_only_substracts) do
+    loadFixture('only_substracts_diff.json')
+  end
   it 'returns empty hash on no offenses' do
     expect(analyze(file_no_offenses)).to eq({})
   end
@@ -26,5 +29,8 @@ RSpec.describe 'method analyze with only modified files' do
   end
   it 'returns array counts the offenses, more complex diff with adds and subtracts' do
     expect(analyze(file_with_offenses_adds_substracts)).to eq({ 'puts' => 6 })
+  end
+  it 'returns empty hash on no offenses, more complex diff with adds and subtracts' do
+    expect(analyze(file_with_no_offenses_only_substracts)).to eq({})
   end
 end
