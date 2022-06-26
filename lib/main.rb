@@ -25,6 +25,8 @@ def analyze(diffs)
   start_diff = diffs[1].split[0] == 'new' ? 6 : 5
   diffs = diffs[start_diff..]
   diffs.each do |diff|
+    next unless diff.start_with? '+'
+
     OFFENSES.each do |offense|
       offenses[offense] += 1 if diff.include? offense
     end
@@ -37,19 +39,38 @@ def getDiffFile(io, file)
   io.getCmdData(cmd).split("\n")
 end
 
-def run
-  io = IOUtils.new
-  listing = mainDiff(io)
-
+def loopFiles(listing, io)
+  results = []
   listing.split("\n").each do |file|
     extension = file.split('.')[-1]
     next unless extension == 'rb'
 
     diffs = getDiffFile(io, file)
-    results = analyze(diffs)
-    puts results
+    result = { file => analyze(diffs) }
+    results << result unless result[file].empty?
   end
-  exit 1
+  results
 end
 
-run if ENV['CHULETAS_CLEANUP_TEST'].nil? # HACK_ME
+def showOffenses(results)
+  results.reduce("OFFENSES:\n") { |acc, result|
+    acc += result.reduce('') { |memo, (file, offenses)| 
+      offenses_string = offenses.reduce("") { |memo_offense, (name, times)|
+        memo_offense += "    #{name} #{times}\n"
+      }
+      memo += "  #{file}\n#{offenses_string}"
+    }
+  }
+end
+
+def run
+  io = IOUtils.new
+  listing = mainDiff(io)
+  results = loopFiles(listing, io)
+  if results.any?
+    puts showOffenses(results)
+    exit 1
+  end
+end
+
+run if ENV['CHULETAS_CLEANUP_TEST'].nil?
