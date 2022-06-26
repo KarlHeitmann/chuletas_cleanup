@@ -1,0 +1,9 @@
+[
+  "diff --git a/prueba.rb b/prueba.rb",
+  "index 9058067e02..33f9fe0eb3 100644",
+  "--- a/prueba.rb",
+  "+++ b/prueba.rb",
+  "@@ -7,0 +8,2 @@ end",
+  "+\"bla bla\" # HACK_ME",
+  "+"
+]

@@ -25,6 +25,8 @@ def analyze(diffs)
   start_diff = diffs[1].split[0] == 'new' ? 6 : 5
   diffs = diffs[start_diff..]
   diffs.each do |diff|
+    next unless diff.start_with? '+'
+
     OFFENSES.each do |offense|
       offenses[offense] += 1 if diff.include? offense
     end
@@ -37,18 +39,29 @@ def getDiffFile(io, file)
   io.getCmdData(cmd).split("\n")
 end
 
-def run
-  io = IOUtils.new
-  listing = mainDiff(io)
-
+def loopFiles(listing, io)
+  results = []
   listing.split("\n").each do |file|
     extension = file.split('.')[-1]
     next unless extension == 'rb'
 
     diffs = getDiffFile(io, file)
-    results = analyze(diffs)
-    puts results
+    puts ":::::::::"
+    puts ":::::::::"
+    puts diffs.inspect
+    puts ":::::::::"
+    puts ":::::::::"
+    result = { file => analyze(diffs) }
+    results << result unless result[file].empty?
   end
+  results
+end
+
+def run
+  io = IOUtils.new
+  listing = mainDiff(io)
+  results = loopFiles(listing, io)
+  puts results
   exit 1
 end
 
