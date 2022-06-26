@@ -46,19 +46,15 @@ def loopFiles(listing, io)
     next unless extension == 'rb'
 
     diffs = getDiffFile(io, file)
-    # puts diffs.inspect
     result = { file => analyze(diffs) }
     results << result unless result[file].empty?
   end
   results
 end
 
-puts "Hola"
-
 def showOffenses(results)
   results.reduce("OFFENSES:\n") { |acc, result|
     acc += result.reduce('') { |memo, (file, offenses)| 
-      # offenses_string = offenses
       offenses_string = offenses.reduce("") { |memo_offense, (name, times)|
         memo_offense += "    #{name} #{times}\n"
       }
@@ -72,12 +68,9 @@ def run
   listing = mainDiff(io)
   results = loopFiles(listing, io)
   if results.any?
-    puts "=================="
-    puts results.inspect
-    puts "//////////////////"
     puts showOffenses(results)
     exit 1
   end
 end
 
-run if ENV['CHULETAS_CLEANUP_TEST'].nil? # HACK_ME
+run if ENV['CHULETAS_CLEANUP_TEST'].nil?

@@ -38,7 +38,3 @@ OFFENSES:
   end
 end
 
-# XXX_ME
-
-# HACK_ME
-
