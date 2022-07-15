@@ -1,3 +1,7 @@
+# UPDATE
+
+Here is the rust version of this project, still there is a lot of work in progress and things to do: https://github.com/KarlHeitmann/chuletas_warning_hook
+
 # OVERVIEW
 
 When I start working on a new project, I always fill up the code with tags, breakpoints and message logs, in order to better
